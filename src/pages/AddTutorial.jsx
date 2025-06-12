@@ -1,5 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
+import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
+import { toast } from "react-hot-toast";
 
 const AddTutorial = () => {
   const { user } = useContext(AuthContext);
@@ -30,6 +32,26 @@ const AddTutorial = () => {
     }));
   };
 
+  const handleSubmit = async () => {
+    try {
+      await axios.post("http://localhost:5000/tutorials", formData);
+      toast.success("Tutorial saved successfully!");
+
+      // Reset form after submission
+      setFormData({
+        name: "",
+        email: user?.email || "",
+        image: "",
+        language: "",
+        price: "",
+        description: "",
+        review: 0,
+      });
+    } catch (error) {
+      toast.error("Failed to save tutorial. Please try again.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 flex justify-center items-center py-12 px-4">
       <div className="w-full max-w-2xl bg-white/80 backdrop-blur-md rounded-2xl shadow-2xl p-8">
@@ -37,12 +59,10 @@ const AddTutorial = () => {
           📘 Add Your Tutorial
         </h2>
 
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
           {/* Name */}
           <div>
-            <label className="block mb-1 font-medium text-gray-700">
-              Your Name
-            </label>
+            <label className="block mb-1 font-medium text-gray-700">Your Name</label>
             <input
               type="text"
               name="name"
@@ -56,9 +76,7 @@ const AddTutorial = () => {
 
           {/* Email */}
           <div>
-            <label className="block mb-1 font-medium text-gray-700">
-              Your Email
-            </label>
+            <label className="block mb-1 font-medium text-gray-700">Your Email</label>
             <input
               type="email"
               name="email"
@@ -70,9 +88,7 @@ const AddTutorial = () => {
 
           {/* Image URL */}
           <div>
-            <label className="block mb-1 font-medium text-gray-700">
-              Tutorial Image URL
-            </label>
+            <label className="block mb-1 font-medium text-gray-700">Tutorial Image URL</label>
             <input
               type="text"
               name="image"
@@ -85,9 +101,7 @@ const AddTutorial = () => {
 
           {/* Language */}
           <div>
-            <label className="block mb-1 font-medium text-gray-700">
-              Language
-            </label>
+            <label className="block mb-1 font-medium text-gray-700">Language</label>
             <input
               type="text"
               name="language"
@@ -100,9 +114,7 @@ const AddTutorial = () => {
 
           {/* Price */}
           <div>
-            <label className="block mb-1 font-medium text-gray-700">
-              Price (USD)
-            </label>
+            <label className="block mb-1 font-medium text-gray-700">Price (USD)</label>
             <input
               type="number"
               name="price"
@@ -116,9 +128,7 @@ const AddTutorial = () => {
 
           {/* Description */}
           <div>
-            <label className="block mb-1 font-medium text-gray-700">
-              Description
-            </label>
+            <label className="block mb-1 font-medium text-gray-700">Description</label>
             <textarea
               name="description"
               value={formData.description}
@@ -132,14 +142,14 @@ const AddTutorial = () => {
           {/* Hidden Review */}
           <input type="hidden" name="review" value={formData.review} />
 
-          {/* Submit Button Placeholder */}
+          {/* Submit Button */}
           <div className="text-center">
             <button
-              type="button"
+              type="submit"
               className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-400 hover:opacity-90 text-white font-semibold px-6 py-2 rounded-xl shadow-md"
-              onClick={() => console.log(formData)}
+              onClick={handleSubmit}
             >
-              ➕ Save Tutorial (Demo)
+              ➕ Save Tutorial
             </button>
           </div>
         </form>

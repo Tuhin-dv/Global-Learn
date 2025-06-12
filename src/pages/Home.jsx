@@ -1,8 +1,12 @@
 import React from 'react'
+import TutorialList from '../components/TutorialList '
 
 function Home() {
   return (
-    <div>Home</div>
+    <div>
+      <TutorialList></TutorialList>
+
+    </div>
   )
 }
 
