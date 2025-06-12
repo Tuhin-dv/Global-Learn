@@ -1,4 +1,4 @@
-// src/Router.jsx
+
 import { createBrowserRouter } from "react-router";
 import MainLayout from "../root/MainLayout";
 import Home from "../pages/Home";
@@ -22,30 +22,38 @@ export const router = createBrowserRouter([
       { path: "/find-tutors", element: <FindTutors /> },
       {
         path: "/find-tutors/:category",
-        element: <FindTutors />, // reuse component with category param
+        element: <FindTutors />, 
       },
       {
         path: "/tutor/:details",
         element:
-            <TutorDetails />
+          <TutorDetails />
       },
       {
         path: "/add-tutorial",
-        element: <AddTutorial />
-        
+        element: (
+          <PrivateRoute>
+            <AddTutorial />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-tutorials",
-        element:
+        element: (
+          <PrivateRoute>
             <MyTutorials />
-         
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-booked-tutors",
-        element: 
+        element: (
+          <PrivateRoute>
             <MyBookedTutors />
-        
+          </PrivateRoute>
+        ),
       },
+
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
     ],
