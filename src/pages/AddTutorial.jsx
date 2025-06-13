@@ -146,10 +146,10 @@ const AddTutorial = () => {
           <div className="text-center">
             <button
               type="submit"
-              className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-400 hover:opacity-90 text-white font-semibold px-6 py-2 rounded-xl shadow-md"
+              className="bg-gradient-to-r from-purple-500  to-sky-500 hover:opacity-90 text-white font-semibold px-6 py-2 rounded-xl shadow-md"
               onClick={handleSubmit}
             >
-              ➕ Save Tutorial
+              Submit
             </button>
           </div>
         </form>

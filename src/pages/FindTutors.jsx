@@ -1,8 +1,11 @@
 import React from 'react'
+import TutorialList from '../components/TutorialList '
 
 function FindTutors() {
   return (
-    <div>FindTutors</div>
+    <div>
+      <TutorialList></TutorialList>
+    </div>
   )
 }
 

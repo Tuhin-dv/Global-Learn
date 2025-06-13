@@ -1,9 +1,22 @@
-import React from 'react'
+import React from "react";
 
-function Hero() {
+const Hero = () => {
   return (
-    <div>Hero</div>
-  )
-}
+    <section className="bg-gradient-to-r from-purple-100 via-pink-100 to-blue-100 py-20 px-6">
+      <div className="max-w-7xl mx-auto text-center">
+        <h1 className="text-5xl md:text-6xl font-extrabold text-gray-800 mb-6 leading-tight">
+          Empower Your Learning Journey with <br />
+          <span className="text-purple-600">Expert Tutors</span>
+        </h1>
+        <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+          Join Globallern today to connect with passionate language tutors, explore diverse cultures, and unlock new opportunities through personalized learning.
+        </p>
+        <button className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-xl shadow-lg transition duration-300">
+          🚀 Get Started
+        </button>
+      </div>
+    </section>
+  );
+};
 
-export default Hero
+export default Hero;

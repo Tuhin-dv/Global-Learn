@@ -1,4 +1,3 @@
-
 import { createBrowserRouter } from "react-router";
 import MainLayout from "../root/MainLayout";
 import Home from "../pages/Home";
@@ -11,6 +10,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import ErrorPage from "../pages/ErrorPage";
 import PrivateRoute from "../components/PrivateRoute";
+import LanguageDetails from "../pages/LanguageDetails";
 
 export const router = createBrowserRouter([
   {
@@ -22,12 +22,11 @@ export const router = createBrowserRouter([
       { path: "/find-tutors", element: <FindTutors /> },
       {
         path: "/find-tutors/:category",
-        element: <FindTutors />, 
+        element: <FindTutors />,
       },
       {
         path: "/tutor/:details",
-        element:
-          <TutorDetails />
+        element: <TutorDetails />,
       },
       {
         path: "/add-tutorial",
@@ -53,7 +52,10 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-
+      {
+        path: "/language/:id", 
+        element: <LanguageDetails />,
+      },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
     ],
