@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { useParams, Link } from 'react-router';
+import axios from 'axios';
+import { AuthContext } from '../contexts/AuthContext';
+
 
 const LanguageDetails = () => {
   const { id } = useParams();
   const [tutorial, setTutorial] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [bookingSuccess, setBookingSuccess] = useState(false);
+  const { user } = useContext(AuthContext); // ✅ Get logged-in user
 
   useEffect(() => {
     fetch(`http://localhost:5000/tutorials/${id}`)
@@ -19,8 +24,37 @@ const LanguageDetails = () => {
       });
   }, [id]);
 
+  const handleBooking = () => {
+    if (!user?.email) {
+      alert('Please log in to book a tutorial.');
+      return;
+    }
+
+    const bookingData = {
+      tutorialId: tutorial._id,
+      name: tutorial.name,
+      language: tutorial.language,
+      image: tutorial.image,
+      price: tutorial.price,
+      review: tutorial.review,
+      email: user.email,
+    };
+
+    axios
+      .post('http://localhost:5000/book-now', bookingData)
+      .then((res) => {
+        console.log('📦 Booked successfully:', res.data);
+        setBookingSuccess(true);
+      })
+      .catch((err) => {
+        console.error('❌ Booking error:', err);
+      });
+  };
+
   if (loading)
-    return <p className="text-center text-lg mt-10 text-indigo-700">Loading...</p>;
+    return (
+      <p className="text-center text-lg mt-10 text-indigo-700">Loading...</p>
+    );
 
   if (!tutorial)
     return (
@@ -44,13 +78,27 @@ const LanguageDetails = () => {
         <p className="mt-1 text-purple-700 font-semibold text-xl">
           💰 Price: ${tutorial.price}
         </p>
-        <p className="mt-2 text-sm text-gray-500 italic">Enhance your fluency with expert-led tutorials</p>
+        <p className="mt-2 text-sm text-gray-500 italic">
+          Enhance your fluency with expert-led tutorials
+        </p>
+
+        <button
+          onClick={handleBooking}
+          className="mt-6 bg-gradient-to-r from-purple-800 via-indigo-900 to-gray-900 text-white px-8 py-2 rounded-full shadow hover:opacity-90 transition"
+          disabled={bookingSuccess}
+        >
+          🚀 {bookingSuccess ? 'Booked' : 'Book Now'}
+        </button>
+
+        {bookingSuccess && (
+          <p className="text-green-600 font-medium mt-3">Successfully booked!</p>
+        )}
       </div>
 
-      <div className="text-center mt-6">
+      <div className="text-center mt-8">
         <Link
           to="/find-tutors"
-          className="inline-block bg-gradient-to-r from-purple-900 via-indigo-900 to-gray-900 text-white px-6 py-2 rounded-full shadow hover:opacity-90 transition"
+          className="inline-block text-indigo-700 hover:underline transition"
         >
           🔙 Back to Tutors
         </Link>

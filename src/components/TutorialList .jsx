@@ -67,7 +67,7 @@ const TutorialList = () => {
                     ⭐ {tutorial.review} Reviews
                   </span>
                   <Link
-                    to={`/language-details/${tutorial._id}`}
+                    to={`/language/${tutorial._id}`}
                     className="ml-auto text-indigo-700 hover:text-indigo-900 font-medium underline underline-offset-2 transition"
                   >
                     View Details →

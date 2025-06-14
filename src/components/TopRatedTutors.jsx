@@ -38,7 +38,7 @@ function TopRatedTutors() {
                 <div className="grid md:grid-cols-3 gap-10">
                     {topTutors.map((tutor, i) => (
                         <motion.div
-                            key={tutor._id}
+                            key={tutor.id}
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: i * 0.2 }}
