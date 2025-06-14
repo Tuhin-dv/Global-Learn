@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const TutorialList = () => {
   const [tutorials, setTutorials] = useState([]);
@@ -21,46 +21,58 @@ const TutorialList = () => {
 
   if (loading)
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <span className="loading loading-spinner text-indigo-600"></span>
+      <div className="flex items-center justify-center min-h-screen bg-white">
+        <span className="loading loading-spinner text-indigo-600 scale-150"></span>
       </div>
     );
 
   return (
-    <div className="bg-gradient-to-r from-purple-50 via-indigo-100 to-gray-100 min-h-screen py-16 px-6 md:px-12">
-      <h2 className="text-4xl font-bold text-center text-indigo-900 mb-10">
+    <div className="bg-gradient-to-r from-purple-50 via-indigo-100 to-gray-100 min-h-screen py-16 px-4 sm:px-8 md:px-16">
+      <h2 className="text-4xl font-bold text-center text-indigo-900 mb-12 tracking-tight">
         🌐 Explore Language Tutorials
       </h2>
 
       {tutorials.length === 0 ? (
         <p className="text-center text-red-500 text-lg">No tutorials found.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="space-y-10">
           {tutorials.map((tutorial) => (
             <div
               key={tutorial._id}
-              className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition"
+              className="bg-white flex flex-col md:flex-row items-center gap-6 p-6 rounded-3xl shadow-md hover:shadow-2xl transition-shadow duration-300 group border border-gray-100"
             >
               <img
                 src={tutorial.image}
                 alt={tutorial.name}
-                className="w-full h-52 object-cover rounded-xl mb-4"
+                className="w-full md:w-72 h-52 object-cover rounded-xl transform group-hover:scale-[1.02] transition-transform duration-300"
               />
-              <h3 className="text-2xl font-semibold text-indigo-800">{tutorial.name}</h3>
-              <p className="text-sm text-gray-500 mt-1 mb-2">
-                Learn <span className="font-medium">{tutorial.language}</span> easily!
-              </p>
 
-              <div className="flex items-center justify-between mt-2">
-                <span className="inline-block bg-gradient-to-r from-purple-800 via-indigo-700 to-gray-800 text-white text-sm px-3 py-1 rounded-full shadow">
-                  ${tutorial.price}
-                </span>
-                <Link
-                  to={`/language-details/${tutorial._id}`}
-                  className="text-indigo-700 hover:underline font-medium"
-                >
-                  View Details →
-                </Link>
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold text-indigo-900 mb-1">
+                 Tutor : {tutorial.name}
+                </h3>
+                <p className="text-gray-600 text-base">
+                  Learn{" "}
+                  <span className="font-semibold text-purple-800">
+                    {tutorial.language}
+                  </span>{" "}
+                  from skilled instructors and enhance your communication skills.
+                </p>
+
+                <div className="flex flex-wrap items-center gap-4 mt-6">
+                  <span className="bg-gradient-to-r from-purple-700 via-indigo-700 to-gray-800 text-white text-sm px-4 py-1.5 rounded-full font-semibold shadow-sm">
+                    ${tutorial.price}
+                  </span>
+                  <span className="text-yellow-500 font-semibold">
+                    ⭐ {tutorial.review} Reviews
+                  </span>
+                  <Link
+                    to={`/language-details/${tutorial._id}`}
+                    className="ml-auto text-indigo-700 hover:text-indigo-900 font-medium underline underline-offset-2 transition"
+                  >
+                    View Details →
+                  </Link>
+                </div>
               </div>
             </div>
           ))}
