@@ -4,6 +4,7 @@ import Hero from '../components/headers/Hero';
 import { FaArrowRight, FaLanguage } from 'react-icons/fa';
 import { HiArrowRightCircle } from "react-icons/hi2";
 import TopRatedTutors from '../components/TopRatedTutors';
+import WhyChooseUsSection from '../components/WhyChooseUsSection';
 const Home = () => {
   const [tutorials, setTutorials] = useState([]);
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Home = () => {
     <div className="">
       <Hero />
       <div className='max-w-7xl mt-20 mx-auto px-4 '>
-        <h2 className="text-3xl font-bold text-center mb-8 text-purple-700">
+        <h2 className="text-3xl font-bold text-center mb-8 text-white">
           Available Languages
         </h2>
 
@@ -32,7 +33,7 @@ const Home = () => {
             <div
               key={tutorial._id}
               onClick={() => handleLanguageClick(tutorial._id)}
-              className='border border-white rounded-lg cursor-pointer'
+              className='border border-white hover:bg-gradient-to-br from-indigo-900 via-purple-900 to-gray-900 rounded-lg cursor-pointer'
             >
 
 
@@ -48,6 +49,7 @@ const Home = () => {
             </div>
           ))}
         </div>
+        <WhyChooseUsSection></WhyChooseUsSection>
         <TopRatedTutors></TopRatedTutors>
       </div>
     </div>
