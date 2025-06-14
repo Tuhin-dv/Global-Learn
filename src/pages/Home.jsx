@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Hero from '../components/headers/Hero';
-
+import { FaArrowRight, FaLanguage } from 'react-icons/fa';
+import { HiArrowRightCircle } from "react-icons/hi2";
+import TopRatedTutors from '../components/TopRatedTutors';
 const Home = () => {
   const [tutorials, setTutorials] = useState([]);
   const navigate = useNavigate();
@@ -18,19 +20,35 @@ const Home = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10">
+    <div className="">
       <Hero />
-      <h2 className="text-3xl font-bold text-center mb-8 text-purple-700">Available Languages</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {tutorials.map((tutorial) => (
-          <div
-            key={tutorial._id}
-            onClick={() => handleLanguageClick(tutorial._id)}
-            className="bg-gradient-to-r from-blue-100 to-purple-100 cursor-pointer p-6 rounded-xl shadow hover:shadow-lg transition"
-          >
-            <h3 className="text-xl font-semibold text-center text-indigo-700">{tutorial.language}</h3>
-          </div>
-        ))}
+      <div className='max-w-7xl mt-20 mx-auto px-4 '>
+        <h2 className="text-3xl font-bold text-center mb-8 text-purple-700">
+          Available Languages
+        </h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {tutorials.map((tutorial) => (
+            <div
+              key={tutorial._id}
+              onClick={() => handleLanguageClick(tutorial._id)}
+              className='border border-white rounded-lg cursor-pointer'
+            >
+
+
+              {/* Language name */}
+              <div className='flex items-center justify-between px-8 py-4 '>
+                <FaLanguage size={25}></FaLanguage>
+                <h3 className="text-xl text-center font-semibold text-white group-hover:text-indigo-900 tracking-wide">
+
+                  {tutorial.language}
+                </h3>
+                <HiArrowRightCircle size={25} />
+              </div>
+            </div>
+          ))}
+        </div>
+        <TopRatedTutors></TopRatedTutors>
       </div>
     </div>
   );

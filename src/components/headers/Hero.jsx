@@ -9,7 +9,7 @@ const Hero = () => {
           <span className="text-purple-600">Expert Tutors</span>
         </h1>
         <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-          Join Globallern today to connect with passionate language tutors, explore diverse cultures, and unlock new opportunities through personalized learning.
+          Join Globallearn today to connect with passionate language tutors, explore diverse cultures, and unlock new opportunities through personalized learning.
         </p>
         <button className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-xl shadow-lg transition duration-300">
           🚀 Get Started
