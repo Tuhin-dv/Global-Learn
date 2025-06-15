@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   const { login, googleLogin } = useContext(AuthContext);
@@ -30,32 +31,34 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300 px-4">
+    <div className="min-h-screen flex items-center justify-center  px-6">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-md bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-10"
+        className="w-full max-w-md bg-white bg-opacity-90 rounded-3xl shadow-2xl p-10"
       >
-        <h2 className="text-3xl font-extrabold text-center text-blue-700 mb-6">Welcome Back</h2>
+        <h2 className="text-center text-4xl font-extrabold text-pink-700 mb-8">
+          Welcome Back
+        </h2>
 
-        <form onSubmit={handleLogin} className="space-y-5">
+        <form onSubmit={handleLogin} className="space-y-6">
           <input
             name="email"
             type="email"
             placeholder="you@example.com"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+            className="w-full p-3 rounded-lg border-2 border-pink-400 focus:outline-none focus:border-pink-600 transition"
           />
           <input
             name="password"
             type="password"
             placeholder="••••••••"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+            className="w-full p-3 rounded-lg border-2 border-pink-400 focus:outline-none focus:border-pink-600 transition"
           />
           <motion.button
             whileHover={{ scale: 1.05 }}
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg"
+            className="w-full bg-gradient-to-r from-purple-900 via-indigo-900 to-gray-900 text-white font-bold py-3 rounded-xl shadow-lg"
           >
             Login
           </motion.button>
@@ -63,14 +66,14 @@ const Login = () => {
 
         <button
           onClick={handleGoogleLogin}
-          className="w-full mt-4 bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition"
+          className="w-full mt-6 flex items-center  justify-center gap-3 border-2 border-pink-500 text-pink-700 font-semibold py-3 rounded-xl shadow-lg hover:bg-pink-100 transition"
         >
-          Continue with Google
+          Continue with Google <FcGoogle size={24} />
         </button>
 
-        <p className="text-sm text-center mt-6 text-gray-600">
+        <p className="text-sm text-center mt-6 text-pink-700">
           Don’t have an account?{" "}
-          <Link to="/register" className="text-blue-600 hover:underline">
+          <Link to="/register" className="font-semibold underline hover:text-red-500">
             Register
           </Link>
         </p>

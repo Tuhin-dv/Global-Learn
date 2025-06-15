@@ -1,52 +1,56 @@
 import React, { useContext, useEffect, useState } from "react";
-
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
 
-function MyTutorials() {
+const MyTutors = () => {
   const { user } = useContext(AuthContext);
   const [tutorials, setTutorials] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`https://your-server-url.com/my-tutorials?email=${user.email}`)
+        .get(`http://localhost:5000/my-tutors?email=${user.email}`)
         .then((res) => {
-          setTutorials(res.data);
-          setLoading(false);
+          if (res.data.success) {
+            setTutorials(res.data.tutorials);
+          }
         })
-        .catch((err) => {
-          console.error("Error fetching tutorials:", err);
-          setLoading(false);
-        });
+        .catch((err) => console.error("Error fetching my tutorials:", err));
     }
   }, [user]);
 
-  if (loading) {
-    return <p className="text-center mt-10">Loading your tutorials...</p>;
-  }
-
-  if (tutorials.length === 0) {
-    return <p className="text-center mt-10">You have not added any tutorials yet.</p>;
-  }
-
   return (
-    <div className="max-w-5xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">My Tutorials</h2>
-      <div className="grid gap-4">
-        {tutorials.map((tutorial) => (
-          <div key={tutorial._id} className="border p-4 rounded shadow bg-white">
-            <img src={tutorial.image} alt={tutorial.language} className="w-full h-48 object-cover rounded mb-2" />
-            <h3 className="text-lg font-semibold">{tutorial.language}</h3>
-            <p className="text-gray-600">{tutorial.description}</p>
-            <p className="text-blue-600 font-semibold mt-2">Price: ${tutorial.price}</p>
-            <p className="text-sm text-gray-500">Review: {tutorial.review}</p>
-          </div>
-        ))}
-      </div>
+    <div className="p-6 min-h-screen">
+      <h2 className="text-3xl font-bold text-white  text-center mb-6">
+        ✏️ My Added Tutorials ({tutorials.length})
+      </h2>
+
+      {tutorials.length === 0 ? (
+        <p className="text-gray-500 text-center">No tutorials added yet.</p>
+      ) : (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {tutorials.map((tutor, index) => (
+            <div
+              key={index}
+              className="p-4 bg-white rounded-xl shadow hover:shadow-lg transition"
+            >
+              <img
+                src={tutor.image}
+                alt={tutor.language}
+                className="h-40 w-full object-cover rounded"
+              />
+              <h3 className="text-xl mt-2 font-semibold text-indigo-800">
+                {tutor.language}
+              </h3>
+              <p className="text-gray-600">By: {tutor.name}</p>
+              <p className="text-indigo-600 font-bold">${tutor.price}</p>
+              <p className="text-yellow-500">⭐ {tutor.review} Reviews</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
-}
+};
 
-export default MyTutorials;
+export default MyTutors;

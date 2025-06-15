@@ -1,15 +1,18 @@
 import { useState, useContext } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { AuthContext } from "../../contexts/AuthContext";
 import { auth } from "../../firebase/Firebase";
+import { MdOutlineLogout } from "react-icons/md";
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const { user } = useContext(AuthContext);
 
   const handleLogout = () => {
-    signOut(auth).catch(err => console.log(err.message));
+    signOut(auth).catch((err) => console.log(err.message));
+    setDropdownOpen(false);
   };
 
   const navLinks = (
@@ -53,14 +56,43 @@ const Nav = () => {
           {navLinks}
         </ul>
 
-        <ul className="flex gap-3 text-white font-medium items-center">
+        <div className="flex items-center gap-3">
           {user ? (
-            <button
-              onClick={handleLogout}
-              className="bg-red-600 hover:bg-red-700 px-4 py-1.5 rounded text-white transition"
-            >
-              Logout
-            </button>
+            <div className="relative">
+              {/* Avatar or First Letter */}
+              {user.photoURL ? (
+                <img
+                  src={user.photoURL}
+                  alt="Profile"
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  className="w-10 h-10 rounded-full cursor-pointer border-2 border-white hover:scale-105 transition"
+                />
+              ) : (
+                <div
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-indigo-600 text-white text-lg font-bold cursor-pointer border-2 border-white hover:scale-105 transition"
+                >
+                  {user.displayName?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase()}
+                </div>
+              )}
+
+              {/* Dropdown */}
+              {dropdownOpen && (
+                <div className="absolute right-0 mt-3 w-48 bg-white rounded-lg shadow-lg py-2 z-50 text-sm">
+                  <div className="px-4 py-2 border-b border-gray-200">
+                    <p className="font-semibold text-gray-700">{user.displayName || "User"}</p>
+                    <p className="text-gray-500 text-xs">{user.email}</p>
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center gap-2 px-4 py-2 hover:bg-red-50 text-red-600 hover:text-red-700 transition"
+                  >
+                    <MdOutlineLogout className="text-lg" />
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
           ) : (
             <>
               <NavLink
@@ -77,8 +109,9 @@ const Nav = () => {
               </NavLink>
             </>
           )}
-        </ul>
+        </div>
 
+        {/* Mobile menu toggle */}
         <div className="md:hidden">
           <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none">
             <svg
@@ -98,6 +131,7 @@ const Nav = () => {
         </div>
       </div>
 
+      {/* Mobile menu */}
       {isOpen && (
         <div className="md:hidden px-4 pb-4 bg-gradient-to-r from-purple-900 via-indigo-900 to-gray-900">
           <ul className="space-y-2 text-white font-medium">{navLinks}</ul>

@@ -24,14 +24,14 @@ const MyBookedTutors = () => {
 
   return (
     <div className="min-h-screen p-6 bg-gray-50">
-      <h2 className="text-3xl font-bold text-indigo-900 mb-6">
+      <h2 className="text-3xl text-center font-bold text-indigo-900 mb-6">
         🎓 My Booked Tutors
       </h2>
 
       {loading ? (
-        <p className="text-gray-500">Loading bookings...</p>
+        <p className="text-gray-500 text-center">Loading bookings...</p>
       ) : bookings.length === 0 ? (
-        <p className="text-gray-500">No bookings found.</p>
+        <p className="text-gray-500 text-center">No bookings found.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {bookings.map((booking, index) => (
