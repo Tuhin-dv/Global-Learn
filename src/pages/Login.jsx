@@ -1,13 +1,15 @@
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { FcGoogle } from "react-icons/fc";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { login, googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  //  Email/Password Login with Toasts
   const handleLogin = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -15,23 +17,41 @@ const Login = () => {
 
     try {
       await login(email, password);
+      toast.success("Login successful!");
       navigate("/");
     } catch (err) {
-      console.error(err.message);
+      toast.error("Login failed: " + err.message);
     }
   };
 
+  // Google Login with Toasts
   const handleGoogleLogin = async () => {
     try {
-      await googleLogin();
+      const result = await googleLogin();
+      const user = result.user;
+
+      const savedUser = {
+        name: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        role: "student",
+      };
+
+      await fetch('http://localhost:5000/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(savedUser),
+      });
+
+      toast.success("Logged in with Google!");
       navigate("/");
     } catch (err) {
-      console.error(err.message);
+      toast.error("Google login failed: " + err.message);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center  px-6">
+    <div className="min-h-screen flex items-center justify-center px-6">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -66,7 +86,7 @@ const Login = () => {
 
         <button
           onClick={handleGoogleLogin}
-          className="w-full mt-6 flex items-center  justify-center gap-3 border-2 border-pink-500 text-pink-700 font-semibold py-3 rounded-xl shadow-lg hover:bg-pink-100 transition"
+          className="w-full mt-6 flex items-center justify-center gap-3 border-2 border-pink-500 text-pink-700 font-semibold py-3 rounded-xl shadow-lg hover:bg-pink-100 transition"
         >
           Continue with Google <FcGoogle size={24} />
         </button>

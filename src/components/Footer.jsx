@@ -6,7 +6,7 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-gradient-to-r from-purple-900 via-indigo-900 to-gray-900 text-white pt-16 pb-8 px-6 md:px-12 mt-20">
+    <footer className="bg-gradient-to-r from-purple-900 via-indigo-900 to-gray-900 text-white pt-16 pb-8 px-6 md:px-12 ">
       <div className="max-w-7xl mx-auto grid md:grid-cols-4 sm:grid-cols-2 gap-12">
         {/* Brand Section */}
         <div className="md:col-span-1">

@@ -20,7 +20,7 @@ const MyTutors = () => {
   }, [user]);
 
   return (
-    <div className="p-6 min-h-screen">
+    <div className="p-6 min-h-screen from-purple-50 via-indigo-100 to-gray-100 ">
       <h2 className="text-3xl font-bold text-white  text-center mb-6">
         ✏️ My Added Tutorials ({tutorials.length})
       </h2>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { IoSearchOutline } from "react-icons/io5";
 
 const TutorialList = () => {
   const [tutorials, setTutorials] = useState([]);
@@ -31,6 +32,14 @@ const TutorialList = () => {
       <h2 className="text-4xl font-bold text-center text-indigo-900 mb-12 tracking-tight">
         🌐 Explore Language Tutorials
       </h2>
+      <div className="flex items-center justify-between border border-gray-400 rounded-lg bg-white px-3 py-2 mb-5">
+        <input
+          type="text"
+          placeholder="Search by Language"
+          className="text-black w-full py-3 bg-white outline-none"
+        />
+        <IoSearchOutline className="text-gray-600 ml-3 cursor-pointer" size={24} />
+      </div>
 
       {tutorials.length === 0 ? (
         <p className="text-center text-red-500 text-lg">No tutorials found.</p>
@@ -49,7 +58,7 @@ const TutorialList = () => {
 
               <div className="flex-1">
                 <h3 className="text-2xl font-bold text-indigo-900 mb-1">
-                 Tutor : {tutorial.name}
+                  Tutor : {tutorial.name}
                 </h3>
                 <p className="text-gray-600 text-base">
                   Learn{" "}

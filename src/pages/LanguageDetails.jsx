@@ -53,7 +53,7 @@ const LanguageDetails = () => {
 
   if (loading)
     return (
-      <p className="text-center text-lg mt-10 text-indigo-700">Loading...</p>
+      <p className="text-center text-lg mt-10 text-indigo-700"><span className="loading loading-spinner loading-xl"></span></p>
     );
 
   if (!tutorial)
@@ -64,7 +64,7 @@ const LanguageDetails = () => {
     );
 
   return (
-    <div className="max-w-3xl mx-auto p-6 mt-10 bg-white shadow-2xl rounded-2xl">
+    <div className="max-w-3xl mx-auto p-6 my-10 bg-white shadow-2xl rounded-2xl">
       <div className="flex flex-col items-center text-center">
         <img
           src={tutorial.image}
