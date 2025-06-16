@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import toast from 'react-hot-toast';
 
 const Register = () => {
   const { register, googleLogin } = useContext(AuthContext);
@@ -17,7 +18,6 @@ const Register = () => {
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-
   const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
@@ -29,17 +29,40 @@ const Register = () => {
     }
 
     try {
-      await register(email, password);
+      await register(email, password); // ✅ Async function call
+
+      // Optional: save user to DB
+      await fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email }),
+      });
+
+      toast.success("🎉 Register successful!");
       navigate("/");
+
     } catch (err) {
-      setError(err.message);
+      toast.error(err.message);
     }
   };
+
+
 
   const handleGoogleSignIn = async () => {
     setError("");
     try {
-      await googleLogin();
+      const result = await googleLogin();
+      const user = result.user;
+
+      //  Save Google user to MongoDB
+      await fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: user.displayName, email: user.email }),
+      });
+
       navigate("/");
     } catch (err) {
       setError(err.message);
@@ -47,7 +70,7 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center  px-6">
+    <div className="min-h-screen flex items-center justify-center px-6">
       <div className="max-w-md w-full bg-white bg-opacity-90 rounded-3xl shadow-2xl p-10">
         <h2 className="text-center text-4xl font-extrabold text-pink-700 mb-8">
           Create Account
@@ -94,7 +117,7 @@ const Register = () => {
           <hr className="w-14 border-pink-700" />
         </div>
 
-          <button
+        <button
           onClick={handleGoogleSignIn}
           className="w-full mt-6 flex items-center justify-center gap-3 border-2 border-pink-500 text-pink-700 font-semibold py-3 rounded-xl shadow-lg hover:bg-pink-100 transition"
         >
