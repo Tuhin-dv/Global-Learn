@@ -1,18 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
-import toast from "react-hot-toast"; // ✅ import toast
+import toast from "react-hot-toast";
 
 const MyTutors = () => {
   const { user } = useContext(AuthContext);
   const [tutorials, setTutorials] = useState([]);
   const [editingTutor, setEditingTutor] = useState(null);
+  const [loading, setLoading] = useState(true); // Loading state added
 
   useEffect(() => {
     fetchMyTutorials();
-  }, [user]);
+  },[user]);
 
   const fetchMyTutorials = () => {
+    setLoading(true);
     if (user?.email) {
       axios
         .get(`http://localhost:5000/my-tutors?email=${user.email}`)
@@ -21,7 +23,10 @@ const MyTutors = () => {
             setTutorials(res.data.tutorials);
           }
         })
-        .catch((err) => console.error("Error fetching tutorials:", err));
+        .catch((err) => console.error("Error fetching tutorials:", err))
+        .finally(() => setLoading(false));
+    } else {
+      setLoading(false);
     }
   };
 
@@ -31,8 +36,10 @@ const MyTutors = () => {
   };
 
   const handleUpdate = () => {
+    const { _id, ...updatedFields } = editingTutor;
+
     axios
-      .patch(`http://localhost:5000/tutorials/${editingTutor._id}`, editingTutor)
+      .patch(`http://localhost:5000/tutorials/${_id}`, updatedFields)
       .then((res) => {
         if (res.data.success) {
           toast.success("Tutorial updated successfully!");
@@ -40,10 +47,11 @@ const MyTutors = () => {
           setEditingTutor(null);
         }
       })
-      .catch((err) => toast.error("Failed to update tutorial"));
+      .catch(() => {
+        toast.error("Failed to update tutorial");
+      });
   };
 
-  // ✅ Toast confirm and delete
   const handleDelete = (id) => {
     toast(
       (t) => (
@@ -52,7 +60,7 @@ const MyTutors = () => {
           <div className="mt-2 flex justify-end gap-2">
             <button
               onClick={() => {
-                toast.dismiss(t.id); // close toast
+                toast.dismiss(t.id);
                 axios
                   .delete(`http://localhost:5000/tutorials/${id}`)
                   .then((res) => {
@@ -86,7 +94,11 @@ const MyTutors = () => {
         ✏️ My Added Tutorials ({tutorials.length})
       </h2>
 
-      {tutorials.length === 0 ? (
+      {loading ? (
+        <div className="flex justify-center items-center h-40">
+          <div className="w-12 h-12 border-4 border-indigo-500 border-dashed rounded-full animate-spin"></div>
+        </div>
+      ) : tutorials.length === 0 ? (
         <p className="text-gray-500 text-2xl text-center">No tutorials added yet.</p>
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -125,7 +137,7 @@ const MyTutors = () => {
         </div>
       )}
 
-      {/* Edit Modal same as before */}
+      {/* Edit Modal */}
       {editingTutor && (
         <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg w-96">

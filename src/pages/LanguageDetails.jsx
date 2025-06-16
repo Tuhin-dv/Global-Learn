@@ -77,6 +77,7 @@ const LanguageDetails = () => {
         </p>
         <p className="mt-1 text-purple-700 font-semibold text-xl">
           💰 Price: ${tutorial.price}
+          
         </p>
         <p className="mt-2 text-sm text-gray-500 italic">
           Enhance your fluency with expert-led tutorials
