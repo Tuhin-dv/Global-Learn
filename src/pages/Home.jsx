@@ -59,7 +59,7 @@ const Home = () => {
         {/* Languages Section */}
         <div className='max-w-7xl mt-10 mx-auto px-4 pb-16'>
           <h2 className="text-3xl font-bold text-center mb-8 text-white">
-            Available Languages
+            Available Unique Languages
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -67,14 +67,14 @@ const Home = () => {
               <div
                 key={language}
                 onClick={() => handleLanguageClick(language)}
-                className='border border-white hover:bg-white/20 transition rounded-lg cursor-pointer'
+                className='border border-white hover:bg-white/20 border-b-4 border-r-4 transition rounded-lg cursor-pointer'
               >
                 <div className='flex items-center justify-between px-8 py-6'>
-                  <FaLanguage size={25} />
+                  <FaLanguage size={28} />
                   <h3 className="text-xl font-semibold text-white tracking-wide">
                     {language}
                   </h3>
-                  <HiArrowRightCircle size={25} />
+                  <HiArrowRightCircle size={28} />
                 </div>
               </div>
             ))}
