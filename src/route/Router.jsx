@@ -56,6 +56,10 @@ export const router = createBrowserRouter([
         path: "/language/:id", 
         element: <LanguageDetails />,
       },
+      {
+        path: "/language/:language", 
+        element: <LanguageDetails />,
+      },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
     ],
