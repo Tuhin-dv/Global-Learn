@@ -4,6 +4,7 @@ import { signOut } from "firebase/auth";
 import { AuthContext } from "../../contexts/AuthContext";
 import { auth } from "../../firebase/Firebase";
 import { MdOutlineLogout } from "react-icons/md";
+import ThemeToggle from "../../components/ThemeToggle";
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -57,9 +58,10 @@ const Nav = () => {
         </ul>
 
         <div className="flex items-center gap-3">
+          <ThemeToggle />
+
           {user ? (
             <div className="relative">
-              {/* Avatar or First Letter */}
               {user.photoURL ? (
                 <img
                   src={user.photoURL}
@@ -76,7 +78,6 @@ const Nav = () => {
                 </div>
               )}
 
-              {/* Dropdown */}
               {dropdownOpen && (
                 <div className="absolute right-0 mt-3 w-48 bg-white rounded-lg shadow-lg py-2 z-50 text-sm">
                   <div className="px-4 py-2 border-b border-gray-200">
@@ -111,7 +112,6 @@ const Nav = () => {
           )}
         </div>
 
-        {/* Mobile menu toggle */}
         <div className="md:hidden">
           <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none">
             <svg
@@ -131,7 +131,6 @@ const Nav = () => {
         </div>
       </div>
 
-      {/* Mobile menu */}
       {isOpen && (
         <div className="md:hidden px-4 pb-4 bg-gradient-to-r from-purple-900 via-indigo-900 to-gray-900">
           <ul className="space-y-2 text-white font-medium">{navLinks}</ul>

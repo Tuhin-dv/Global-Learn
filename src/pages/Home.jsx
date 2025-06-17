@@ -6,6 +6,8 @@ import { HiArrowRightCircle } from "react-icons/hi2";
 import TopRatedTutors from '../components/TopRatedTutors';
 import WhyChooseUsSection from '../components/WhyChooseUsSection';
 
+
+
 const Home = () => {
   const [tutorials, setTutorials] = useState([]);
   const [users, setUsers] = useState([]);
@@ -40,7 +42,7 @@ const Home = () => {
   return (
     <div className="text-white">
       <Hero />
-
+        
       {/* Stats Cards */}
       <div className="max-w-7xl mx-auto px-4 pt-16 pb-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <div className="bg-white/10 p-6 rounded-xl shadow-md flex flex-col items-center text-center hover:bg-white/20 transition">
