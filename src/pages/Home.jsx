@@ -37,7 +37,7 @@ const Home = () => {
   const uniqueTutorials = Array.from(uniqueLanguagesMap.values()).slice(0, 9);
 
   return (
-    <div className="bg-white dark:bg-black/40 text-white transition-colors duration-300">
+    <div className="bg-white dark:bg-black/20 text-white transition-colors duration-300">
       <Hero />
 
      {/* Stats Cards */}
@@ -63,28 +63,62 @@ const Home = () => {
 
       {/* Languages Section */}
       <div className="max-w-7xl mx-auto mt-10 px-4 pb-16">
-        <h2 className="text-3xl font-bold text-center mb-8 text-white">
+      {/* Enhanced Header */}
+      <div className="text-center mb-12">
+        
+        <h2 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 mb-4 tracking-tight">
           Top Languages
         </h2>
+        <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          Explore our most popular languages.
+        </p>
+      </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {uniqueTutorials.map((tutorial) => (
-            <div
-              key={tutorial._id}
-              onClick={() => handleLanguageClick(tutorial._id)}
-              className="border  border-black text-black dark:text-white dark:border-white rounded-lg cursor-pointer hover:bg-white/10 transition"
-            >
-              <div className="flex items-center justify-between px-8 py-4">
-                <FaLanguage size={25} />
-                <h3 className="text-xl text-black dark:text-white text-center font-semibold  tracking-wide">
+      {/* Enhanced Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {uniqueTutorials.map((tutorial) => (
+          <div
+            key={tutorial._id}
+            onClick={() => handleLanguageClick(tutorial._id)}
+            className="group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-800 rounded-2xl cursor-pointer hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-200/50 dark:border-gray-700/50 overflow-hidden"
+          >
+            <div className="p-6">
+              <div className="flex items-center justify-between">
+                {/* Enhanced Icon */}
+                <div className="w-12 h-12 bg-gradient-to-r from-purple-400 to-blue-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <FaLanguage size={20} className="text-white" />
+                </div>
+
+                {/* Enhanced Language Title */}
+                <h3 className="text-xl text-black dark:text-white text-center font-bold tracking-wide group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300 flex-1 mx-4">
                   {tutorial.language}
                 </h3>
-                <HiArrowRightCircle size={25} />
+
+                {/* Enhanced Arrow */}
+                <div className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center group-hover:bg-purple-100 dark:group-hover:bg-purple-900/50 transition-all duration-300">
+                  <HiArrowRightCircle
+                    size={24}
+                    className="text-purple-600 dark:text-purple-400 group-hover:translate-x-1 transition-transform duration-300"
+                  />
+                </div>
+              </div>
+
+              {/* Decorative Elements */}
+              <div className="mt-4 flex items-center justify-center">
+                <div className="flex space-x-1">
+                  <div className="w-2 h-2 bg-purple-400 rounded-full opacity-60"></div>
+                  <div className="w-2 h-2 bg-blue-400 rounded-full opacity-60"></div>
+                  <div className="w-2 h-2 bg-indigo-400 rounded-full opacity-60"></div>
+                </div>
               </div>
             </div>
-          ))}
-        </div>
+
+            {/* Animated Bottom Border */}
+            <div className="h-1 bg-gradient-to-r from-purple-400 to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+          </div>
+        ))}
       </div>
+    </div>
 
       <WhyChooseUsSection />
       <TopRatedTutors />

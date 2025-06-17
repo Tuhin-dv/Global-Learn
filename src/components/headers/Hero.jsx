@@ -6,7 +6,7 @@ const Hero = () => {
   return (
     <div
       className="relative py-24 px-6 overflow-hidden
-      bg-white text-gray-800 dark:bg-black/40 dark:text-white"
+      bg-white text-gray-800 dark:bg-black/40 border-b-4 dark:text-white"
     >
       {/* Animated radial gradient in light mode */}
       <motion.div

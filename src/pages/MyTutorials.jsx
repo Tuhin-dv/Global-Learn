@@ -143,14 +143,13 @@ const MyTutors = () => {
     )
   }
 
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-100 to-blue-50 dark:from-gray-900 dark:via-slate-900 dark:to-gray-800 transition-colors duration-500">
       <div className="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         {/* Enhanced Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full mb-6 shadow-xl">
-            <span className="text-3xl">📚</span>
-          </div>
+          
           <h2 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-4 tracking-tight">
             My Added Tutorials
           </h2>
