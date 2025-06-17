@@ -12,7 +12,7 @@ const LanguageDetails = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/tutorials/${id}`)
+    fetch(`https://globallern-server.vercel.app/tutorials/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setTutorial(data);
@@ -41,7 +41,7 @@ const LanguageDetails = () => {
     };
 
     axios
-      .post('http://localhost:5000/book-now', bookingData)
+      .post('https://globallern-server.vercel.app/book-now', bookingData)
       .then((res) => {
         console.log('📦 Booked successfully:', res.data);
         setBookingSuccess(true);

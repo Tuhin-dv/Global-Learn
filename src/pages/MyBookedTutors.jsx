@@ -12,7 +12,7 @@ const MyBookedTutors = () => {
     if (user?.email) {
       setLoading(true);
       axios
-        .get(`http://localhost:5000/my-bookings?email=${user.email}`)
+        .get(`https://globallern-server.vercel.app/my-bookings?email=${user.email}`)
         .then((res) => {
           setBookings(res.data.bookings || []);
           setLoading(false);
@@ -31,7 +31,7 @@ const handleReviewClick = async (bookingId) => {
 
   try {
     const response = await axios.patch(
-      `http://localhost:5000/book-now/review/${bookingId}`
+      `https://globallern-server.vercel.app/book-now/review/${bookingId}`
     );
 
     if (response.data.success) {
