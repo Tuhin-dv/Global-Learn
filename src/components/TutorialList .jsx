@@ -6,6 +6,7 @@ import { IoSearchOutline } from "react-icons/io5";
 const TutorialList = () => {
   const [tutorials, setTutorials] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     axios
@@ -15,7 +16,6 @@ const TutorialList = () => {
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Error fetching tutorials:", err);
         setLoading(false);
       });
   }, []);
@@ -27,25 +27,33 @@ const TutorialList = () => {
       </div>
     );
 
+  // 🔍 Filter logic based on search
+  const filteredTutorials = tutorials.filter((tutorial) =>
+    tutorial.language.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <div className="bg-gradient-to-r from-purple-50 via-indigo-100 to-gray-100 min-h-screen py-16 px-4 sm:px-8 md:px-16">
       <h2 className="text-4xl font-bold text-center text-indigo-900 mb-12 tracking-tight">
         🌐 Explore Language Tutorials
       </h2>
+
       <div className="flex items-center justify-between border border-gray-400 rounded-lg bg-white px-3 py-2 mb-5">
         <input
           type="text"
           placeholder="Search by Language"
           className="text-black w-full py-3 bg-white outline-none"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
-        <IoSearchOutline className="text-gray-600 ml-3 cursor-pointer" size={24} />
+        <IoSearchOutline className="text-gray-600 ml-3" size={24} />
       </div>
 
-      {tutorials.length === 0 ? (
+      {filteredTutorials.length === 0 ? (
         <p className="text-center text-red-500 text-lg">No tutorials found.</p>
       ) : (
         <div className="space-y-10">
-          {tutorials.map((tutorial) => (
+          {filteredTutorials.map((tutorial) => (
             <div
               key={tutorial._id}
               className="bg-white flex flex-col md:flex-row items-center gap-6 p-6 rounded-3xl shadow-md hover:shadow-2xl transition-shadow duration-300 group border border-gray-100"

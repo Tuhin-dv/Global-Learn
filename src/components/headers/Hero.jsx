@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import languImg from '../../assets/languageimg.jpg'
 const Hero = () => {
   return (
-    <div className="bg-gradient-to-r from-purple-100 via-pink-100 to-blue-100 py-24 px-6">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
+    <div className="bg-gradient-to-r  from-purple-100 via-pink-100 to-blue-100 py-24 px-6">
+      <div className="max-w-7xl  px-6 mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
 
         {/* Left: Text Content */}
         <motion.div
