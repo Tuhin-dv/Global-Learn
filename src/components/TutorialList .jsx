@@ -15,48 +15,46 @@ const TutorialList = () => {
         setTutorials(res.data);
         setLoading(false);
       })
-      .catch((err) => {
-        setLoading(false);
-      });
+      .catch(() => setLoading(false));
   }, []);
 
   if (loading)
     return (
-      <div className="flex items-center justify-center min-h-screen bg-white">
+      <div className="flex items-center justify-center min-h-screen bg-white dark:bg-gray-900">
         <span className="loading loading-spinner text-indigo-600 scale-150"></span>
       </div>
     );
 
-  // 🔍 Filter logic based on search
   const filteredTutorials = tutorials.filter((tutorial) =>
     tutorial.language.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
-    <div className="bg-gradient-to-r from-purple-50 via-indigo-100 to-gray-100 min-h-screen py-16 px-4 sm:px-8 md:px-16">
-      <h2 className="text-4xl font-bold text-center text-indigo-900 mb-12 tracking-tight">
+    <div className="min-h-screen py-16 px-4 sm:px-8 md:px-16 bg-gradient-to-r from-purple-50 via-indigo-100 to-gray-100 dark:from-gray-900 dark:via-gray-950 dark:to-black transition-all duration-300">
+      <h2 className="text-4xl font-bold text-center text-indigo-900 dark:text-white mb-12 tracking-tight">
         🌐 Explore Language Tutorials
       </h2>
 
-      <div className="flex items-center justify-between border border-gray-400 rounded-lg bg-white px-3 py-2 mb-5">
+      {/* Search Bar */}
+      <div className="flex items-center justify-between border border-gray-400 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 px-4 py-2 mb-6 shadow-sm">
         <input
           type="text"
           placeholder="Search by Language"
-          className="text-black w-full py-3 bg-white outline-none"
+          className="text-gray-800 dark:text-white w-full bg-transparent outline-none py-2"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <IoSearchOutline className="text-gray-600 ml-3" size={24} />
+        <IoSearchOutline className="text-gray-500 dark:text-gray-300 ml-3" size={22} />
       </div>
 
       {filteredTutorials.length === 0 ? (
-        <p className="text-center text-red-500 text-lg">No tutorials found.</p>
+        <p className="text-center text-red-500 text-lg font-medium">No tutorials found.</p>
       ) : (
         <div className="space-y-10">
           {filteredTutorials.map((tutorial) => (
             <div
               key={tutorial._id}
-              className="bg-white flex flex-col md:flex-row items-center gap-6 p-6 rounded-3xl shadow-md hover:shadow-2xl transition-shadow duration-300 group border border-gray-100"
+              className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex flex-col md:flex-row items-center gap-6 p-6 rounded-3xl shadow-md hover:shadow-2xl transition-all duration-300 group"
             >
               <img
                 src={tutorial.image}
@@ -65,12 +63,12 @@ const TutorialList = () => {
               />
 
               <div className="flex-1">
-                <h3 className="text-2xl font-bold text-indigo-900 mb-1">
+                <h3 className="text-2xl font-bold text-indigo-900 dark:text-white mb-1">
                   Tutor : {tutorial.name}
                 </h3>
-                <p className="text-gray-600 text-base">
+                <p className="text-gray-600 dark:text-gray-300 text-base">
                   Learn{" "}
-                  <span className="font-semibold text-purple-800">
+                  <span className="font-semibold text-purple-800 dark:text-purple-400">
                     {tutorial.language}
                   </span>{" "}
                   from skilled instructors and enhance your communication skills.
@@ -85,7 +83,7 @@ const TutorialList = () => {
                   </span>
                   <Link
                     to={`/language/${tutorial._id}`}
-                    className="ml-auto text-indigo-700 hover:text-indigo-900 font-medium underline underline-offset-2 transition"
+                    className="ml-auto text-indigo-700 dark:text-indigo-400 hover:underline font-medium transition"
                   >
                     View Details →
                   </Link>

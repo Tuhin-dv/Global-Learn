@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-a.active{
-    border-bottom: 1px solid white;
+a.active {
+  border-bottom: 1px solid black; 
 }

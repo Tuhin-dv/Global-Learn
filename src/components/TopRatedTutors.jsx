@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { motion } from "framer-motion";
 
 function TopRatedTutors() {
@@ -33,9 +33,9 @@ function TopRatedTutors() {
   ];
 
   return (
-    <div className="py-20 ">
+    <div className="py-20   text-white transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-4xl font-extrabold text-center text-white mb-12 tracking-wide">
+        <h2 className="text-4xl font-extrabold text-center mb-12 tracking-wide text-gray-800 dark:text-purple-100">
           🌟 Top Rated Tutors
         </h2>
 
@@ -46,7 +46,7 @@ function TopRatedTutors() {
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.2 }}
-              className="rounded-3xl overflow-hidden bg-white shadow-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 border border-purple-200"
+              className="rounded-3xl overflow-hidden bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border border-purple-200 dark:border-purple-800 shadow-xl hover:scale-105 transition-transform duration-300"
             >
               <div className="relative">
                 <img
@@ -61,11 +61,11 @@ function TopRatedTutors() {
               </div>
 
               <div className="p-6 space-y-3">
-                <h3 className="text-2xl font-bold text-gray-800">{tutor.name}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-purple-100">{tutor.name}</h3>
+                <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-300">
                   {tutor.description}
                 </p>
-                <div className="flex items-center justify-between text-gray-600 text-sm pt-2">
+                <div className="flex items-center justify-between text-sm pt-2 text-gray-600 dark:text-gray-400">
                   <span>💲 <span className="font-semibold">{tutor.price}</span></span>
                   <span>⭐ {tutor.review} Reviews</span>
                 </div>
@@ -75,7 +75,7 @@ function TopRatedTutors() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default TopRatedTutors
+export default TopRatedTutors;

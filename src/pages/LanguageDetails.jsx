@@ -2,14 +2,14 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams, Link } from 'react-router';
 import axios from 'axios';
 import { AuthContext } from '../contexts/AuthContext';
-
+import toast from 'react-hot-toast';
 
 const LanguageDetails = () => {
   const { id } = useParams();
   const [tutorial, setTutorial] = useState(null);
   const [loading, setLoading] = useState(true);
   const [bookingSuccess, setBookingSuccess] = useState(false);
-  const { user } = useContext(AuthContext); // ✅ Get logged-in user
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     fetch(`http://localhost:5000/tutorials/${id}`)
@@ -26,7 +26,7 @@ const LanguageDetails = () => {
 
   const handleBooking = () => {
     if (!user?.email) {
-      alert('Please log in to book a tutorial.');
+      toast.error('Please log in to book a tutorial.');
       return;
     }
 
@@ -45,15 +45,19 @@ const LanguageDetails = () => {
       .then((res) => {
         console.log('📦 Booked successfully:', res.data);
         setBookingSuccess(true);
+        toast.success('Successfully booked!');
       })
       .catch((err) => {
         console.error('❌ Booking error:', err);
+        toast.error('Booking failed. Try again.');
       });
   };
 
   if (loading)
     return (
-      <p className="text-center text-lg mt-10 text-indigo-700"><span className="loading loading-spinner loading-xl"></span></p>
+      <p className="text-center text-lg mt-10 text-indigo-700">
+        <span className="loading loading-spinner loading-xl"></span>
+      </p>
     );
 
   if (!tutorial)
@@ -71,13 +75,15 @@ const LanguageDetails = () => {
           alt={tutorial.language}
           className="w-40 h-40 object-cover rounded-full border-4 border-indigo-500 shadow-lg"
         />
-        <h2 className="text-3xl font-bold text-indigo-800 mt-4">{tutorial.language}</h2>
+        <h2 className="text-3xl font-bold text-indigo-800 mt-4">
+          {tutorial.language}
+        </h2>
         <p className="mt-2 text-gray-600 text-lg">
-          <span className="font-semibold text-gray-800">Created by:</span> {tutorial.name}
+          <span className="font-semibold text-gray-800">Created by:</span>{' '}
+          {tutorial.name}
         </p>
         <p className="mt-1 text-purple-700 font-semibold text-xl">
           💰 Price: ${tutorial.price}
-          
         </p>
         <p className="mt-2 text-sm text-gray-500 italic">
           Enhance your fluency with expert-led tutorials
@@ -92,7 +98,9 @@ const LanguageDetails = () => {
         </button>
 
         {bookingSuccess && (
-          <p className="text-green-600 font-medium mt-3">Successfully booked!</p>
+          <p className="text-green-600 font-medium mt-3">
+            Successfully booked!
+          </p>
         )}
       </div>
 
