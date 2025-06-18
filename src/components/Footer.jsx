@@ -135,7 +135,7 @@ const Footer = () => {
                   <a
                     key={index}
                     href={social.href}
-                    className={`group p-3 rounded-xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 ${social.color}`}
+                    className={`group p-3 rounded-xl bg-purple-300 text-gray-500 dark:text-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 ${social.color}`}
                     aria-label={social.name}
                   >
                     <div className="group-hover:scale-110 transition-transform duration-300">{social.icon}</div>

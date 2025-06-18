@@ -33,7 +33,7 @@ const MyTutors = () => {
       // Use real API for production
       if (user?.email) {
         axios
-          .get(`https://globallern-server.vercel.app/my-tutors?email=${user.email}`)
+          .get(`http://localhost:5000/my-tutors?email=${user.email}`)
           .then((res) => {
             if (res.data.success) {
               setTutorials(res.data.tutorials)
@@ -70,7 +70,7 @@ const MyTutors = () => {
     } else {
       // Real API call for production
       axios
-        .patch(`https://globallern-server.vercel.app/tutorials/${_id}`, updatedFields)
+        .patch(`http://localhost:5000/tutorials/${_id}`, updatedFields)
         .then((res) => {
           if (res.data.success) {
             toast.success("Tutorial updated successfully!")
@@ -116,7 +116,7 @@ const MyTutors = () => {
                 } else {
                   // Real API call for production
                   axios
-                    .delete(`https://globallern-server.vercel.app/tutorials/${id}`)
+                    .delete(`http://localhost:5000/tutorials/${id}`)
                     .then((res) => {
                       if (res.data.success) {
                         toast.success("Tutorial deleted!")

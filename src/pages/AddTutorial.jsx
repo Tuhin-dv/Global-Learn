@@ -59,7 +59,7 @@ const AddTutorial = () => {
         toast.success("🎉 Tutorial saved successfully!")
       } else {
         // Real API call for production
-        await axios.post("https://globallern-server.vercel.app/tutorials", formData)
+        await axios.post("http://localhost:5000/tutorials", formData)
         toast.success("🎉 Tutorial saved successfully!")
       }
 

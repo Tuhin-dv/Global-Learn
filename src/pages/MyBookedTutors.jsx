@@ -1,61 +1,81 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
+import toast from "react-hot-toast";
 
 const MyBookedTutors = () => {
   const { user } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
+  const [updatingId, setUpdatingId] = useState(null);
+  const [reviewedBookings, setReviewedBookings] = useState(new Set());
 
   useEffect(() => {
     if (user?.email) {
-      setLoading(true);
-      axios
-        .get(`https://globallern-server.vercel.app/my-bookings?email=${user.email}`)
-        .then((res) => {
-          setBookings(res.data.bookings || []);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.error("Booking fetch error:", err);
-          setErrorMsg("Failed to load bookings");
-          setLoading(false);
-        });
+      fetchBookings(user.email);
     }
   }, [user]);
 
-const handleReviewClick = async (bookingId) => {
-  setErrorMsg("");
-  console.log("Review click ID:", bookingId);
+  const fetchBookings = async (email) => {
+    setLoading(true);
+    setErrorMsg("");
+    try {
+      const res = await axios.get(`http://localhost:5000/my-bookings?email=${email}`);
+      if (res.data.success) {
+        setBookings(res.data.bookings || []);
 
+        const reviewedSet = new Set(
+          (res.data.bookings || [])
+            .filter(b => b.hasReviewed)
+            .map(b => b._id.toString())
+        );
+        setReviewedBookings(reviewedSet);
+      } else {
+        setErrorMsg("Failed to load bookings");
+        toast.error("Failed to load bookings");
+      }
+    } catch (err) {
+      console.error("Booking fetch error:", err);
+      setErrorMsg("Failed to load bookings");
+      toast.error("Failed to load bookings");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+ const handleReviewClick = async (bookingId) => {
+  setUpdatingId(bookingId);
   try {
-    const response = await axios.patch(
-      `https://globallern-server.vercel.app/book-now/review/${bookingId}`
-    );
+    const res = await axios.patch(`http://localhost:5000/book-now/review/${bookingId}`);
+    console.log("Response from server:", res.data);
 
-    if (response.data.success) {
-      const updatedReview = response.data.booking.review ?? 1;
+    if (res.data?.success) {
+      // Disable the review button
+      setReviewedBookings((prev) => new Set(prev).add(bookingId));
 
-      setBookings((prevBookings) =>
-        prevBookings.map((booking) =>
-          booking._id === bookingId
-            ? { ...booking, review: updatedReview }
-            : booking
+      // Update the review count locally to reflect instantly
+      setBookings((prev) =>
+        prev.map((b) =>
+          b._id === bookingId ? { ...b, review: (b.review ?? 0) + 1 } : b
         )
       );
+
+      toast.success("Review Successful");
     } else {
-      setErrorMsg("Could not update review. Please try again.");
+      toast.error("Review update failed: Invalid response");
     }
   } catch (error) {
     console.error("Review update failed:", error);
-    setErrorMsg("Could not update review. Please try again.");
+    toast.error("Something went wrong");
+  } finally {
+    setUpdatingId(null);
   }
 };
 
 
   return (
-    <div className="min-h-screen p-6 bg-gray-50 dark:bg-gray-900 transition-colors duration-500">
+    <div className="min-h-screen p-6 bg-gray-50 dark:bg-black/40 transition-colors duration-500">
       <h2 className="text-4xl md:text-5xl text-center font-extrabold text-indigo-900 dark:text-indigo-400 mb-10">
         🎓 My Booked Tutors
       </h2>
@@ -79,7 +99,7 @@ const handleReviewClick = async (bookingId) => {
             {bookings.map((booking) => (
               <div
                 key={booking._id}
-                className="flex flex-col bg-white dark:bg-gray-800 rounded-3xl shadow-lg border border-indigo-100 dark:border-indigo-700 hover:shadow-2xl transition-shadow duration-300"
+                className="flex flex-col bg-white dark:bg-black/10 rounded-3xl shadow-lg border border-indigo-100 dark:border-indigo-700 hover:shadow-2xl transition-shadow duration-300"
               >
                 <img
                   src={booking.image}
@@ -97,16 +117,27 @@ const handleReviewClick = async (bookingId) => {
                     💰 ${booking.price}
                   </p>
                   <p className="text-yellow-500 font-semibold text-md mb-2">
-                    ⭐ {booking.review} Reviews
+                    ⭐ {booking.review ?? 0} Reviews
                   </p>
                   <p className="text-gray-500 dark:text-gray-400 text-sm line-clamp-3 mb-4">
                     {booking.description || "No description available."}
                   </p>
                   <button
-                    onClick={() => handleReviewClick(booking._id)}
-                    className="self-start px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold transition"
+                    onClick={() => handleReviewClick(booking._id.toString())}
+                    disabled={
+                      updatingId === booking._id.toString() || reviewedBookings.has(booking._id.toString())
+                    }
+                    className={`self-start px-4 py-2 rounded-lg font-semibold transition ${
+                      updatingId === booking._id.toString() || reviewedBookings.has(booking._id.toString())
+                        ? "bg-gray-400 cursor-not-allowed"
+                        : "bg-indigo-600 hover:bg-indigo-700 text-white"
+                    }`}
                   >
-                    Add Review
+                    {reviewedBookings.has(booking._id.toString())
+                      ? "Reviewed"
+                      : updatingId === booking._id.toString()
+                      ? "Updating..."
+                      : "Add Review"}
                   </button>
                 </div>
               </div>

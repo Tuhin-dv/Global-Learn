@@ -35,7 +35,7 @@ const Register = () => {
     try {
       await register(email, password);
 
-      await fetch("https://globallern-server.vercel.app/users", {
+      await fetch("http://localhost:5000/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email }),
@@ -54,7 +54,7 @@ const Register = () => {
       const result = await googleLogin();
       const user = result.user;
 
-      await fetch("https://globallern-server.vercel.app/users", {
+      await fetch("http://localhost:5000/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: user.displayName, email: user.email }),

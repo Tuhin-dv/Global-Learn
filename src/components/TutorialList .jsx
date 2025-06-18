@@ -10,7 +10,7 @@ const TutorialList = () => {
 
   useEffect(() => {
     axios
-      .get("https://globallern-server.vercel.app/tutorials")
+      .get("http://localhost:5000/tutorials")
       .then((res) => {
         setTutorials(res.data);
         setLoading(false);
@@ -73,7 +73,7 @@ const TutorialList = () => {
                   </span>{" "}
                   from skilled instructors and enhance your communication skills.
                 </p>
-
+                 <p className="font-semibold text-gray-600 dark:text-white"><span className="font-semibold">Description </span>: {tutorial.description}</p>
                 <div className="flex flex-wrap items-center gap-4 mt-6">
                   <span className="bg-gradient-to-r from-purple-700 via-indigo-700 to-gray-800 text-white text-sm px-4 py-1.5 rounded-full font-semibold shadow-sm">
                     ${tutorial.price}
