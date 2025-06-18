@@ -75,7 +75,7 @@ const MyBookedTutors = () => {
 
 
   return (
-    <div className="min-h-screen p-6 bg-gray-50 dark:bg-black/40 transition-colors duration-500">
+    <div className="min-h-screen p-6 bg-gray-50 dark:bg-black/60 transition-colors duration-500">
       <h2 className="text-4xl md:text-5xl text-center font-extrabold text-indigo-900 dark:text-indigo-400 mb-10">
         🎓 My Booked Tutors
       </h2>
@@ -99,7 +99,7 @@ const MyBookedTutors = () => {
             {bookings.map((booking) => (
               <div
                 key={booking._id}
-                className="flex flex-col bg-white dark:bg-black/10 rounded-3xl shadow-lg border border-indigo-100 dark:border-indigo-700 hover:shadow-2xl transition-shadow duration-300"
+                className="flex flex-col bg-white dark:bg-black/20 rounded-3xl shadow-lg border border-indigo-100 dark:border-indigo-700 hover:shadow-2xl transition-shadow duration-300"
               >
                 <img
                   src={booking.image}
