@@ -10,7 +10,7 @@ const TutorialList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/tutorials")
+      .get("https://globallern-server.vercel.app/tutorials")
       .then((res) => {
         setTutorials(res.data);
         setLoading(false);

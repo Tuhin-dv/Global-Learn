@@ -13,11 +13,11 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:5000/tutorials')
+    fetch('https://globallern-server.vercel.app/tutorials')
       .then((res) => res.json())
       .then((data) => setTutorials(data))
 
-    fetch('http://localhost:5000/users')
+    fetch('https://globallern-server.vercel.app/users')
       .then((res) => res.json())
       .then((data) => setUsers(data))
   }, []);
