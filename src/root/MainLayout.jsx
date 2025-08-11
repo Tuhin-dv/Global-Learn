@@ -3,11 +3,12 @@ import Nav from '../components/headers/Nav'
 import { Outlet } from 'react-router'
 import Footer from '../components/Footer'
 
+
 function MainLayout() {
   return (
-    <div>
+    <div className='relative'>
         <Nav></Nav>
-       <div className=''>
+       <div>
          <Outlet></Outlet>
        </div>
        <Footer></Footer>
