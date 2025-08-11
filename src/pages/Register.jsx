@@ -3,6 +3,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import toast from "react-hot-toast";
+import { Link } from "react-router";
 
 const Register = () => {
   const { register, googleLogin } = useContext(AuthContext);
@@ -121,6 +122,7 @@ const Register = () => {
         >
           <FcGoogle size={24} /> Continue with Google
         </button>
+      <p className="text-black text-center mt-4">Already have an account? <Link className="underline text-blue-500" to='/login'>Login</Link></p>
       </div>
     </div>
   );

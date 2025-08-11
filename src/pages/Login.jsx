@@ -93,11 +93,11 @@ const Login = () => {
           <FcGoogle size={24} /> Continue with Google
         </button>
 
-        <p className="text-sm text-center mt-6 text-pink-700 dark:text-pink-400">
+        <p className="text-sm text-center mt-6  text-black">
           Don’t have an account?{" "}
           <Link
             to="/register"
-            className="font-semibold underline hover:text-red-500"
+            className="font-semibold underline text-blue-500 "
           >
             Register
           </Link>

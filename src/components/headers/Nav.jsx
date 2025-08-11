@@ -109,16 +109,11 @@ const Nav = () => {
             <>
               <NavLink
                 to="/login"
-                className="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded transition"
+                className="px-4 py-1.5 bg-gradient-to-tr from-purple-500 to-blue-400 text-white rounded transition"
               >
                 Login
               </NavLink>
-              <NavLink
-                to="/register"
-                className="px-4 py-1.5 bg-green-600 hover:bg-green-700 text-white rounded transition"
-              >
-                Register
-              </NavLink>
+              
             </>
           )}
         </div>
