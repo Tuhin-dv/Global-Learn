@@ -1,6 +1,9 @@
 # 🌍 Globallearn - Online Tutor Booking Platform
 
-Globallearn is an online platform designed to connect language learners with expert tutors around the world. Users can search for tutors by language, book lessons, write reviews, and manage their tutorial bookings—all in a clean, responsive, and user-friendly interface. **LiveLink:** [globallearn-4c354.web.app](https://globallearn-4c354.web.app)
+Globallearn is an online platform designed to connect language learners with expert tutors around the world. Users can search for tutors by language, book lessons, write reviews, and manage their tutorial bookings—all in a clean, responsive, and user-friendly interface.  
+
+**LiveLink:** [globallearn-4c354.web.app](https://globallearn-4c354.web.app)
+
 ---
 
 ## 🚀 Features
@@ -17,7 +20,7 @@ Globallearn is an online platform designed to connect language learners with exp
 - 🧾 JWT-Based Protected Routes
 - ⚠️ 404 Error Page + Loading States
 
---
+---
 
 ## 🧪 Technologies Used
 
@@ -34,9 +37,9 @@ Globallearn is an online platform designed to connect language learners with exp
 
 ### 🔐 Authentication
 
-- Firebase Authentication
-  - Email & Password Login
-  - Google Login
+- Firebase Authentication  
+  - Email & Password Login  
+  - Google Login  
 
 ### 🌐 Server (Backend)
 
@@ -47,8 +50,3 @@ Globallearn is an online platform designed to connect language learners with exp
 - bcryptjs
 - dotenv
 - cors
-
----
-
-
-
