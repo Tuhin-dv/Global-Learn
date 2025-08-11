@@ -11,7 +11,7 @@ const features = [
 
 const WhyChooseUsSection = () => {
   return (
-    <section className="relative mt-16 bg-teal-200 dark:bg-gradient-to-br dark:from-indigo-900 dark:via-purple-900 dark:to-gray-900 text-black dark:text-white rounded-3xl overflow-hidden">
+    <section className="relative mt-16 bg-gradient-to-tr from-teal-100 to-sky-300 dark:bg-gradient-to-br dark:from-indigo-900 dark:via-purple-900 dark:to-gray-900 text-black dark:text-white rounded-3xl overflow-hidden">
       {/* Background effect */}
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-700/20 to-transparent pointer-events-none z-0" />
 

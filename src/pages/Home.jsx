@@ -42,19 +42,19 @@ const Home = () => {
 
       {/* Stats Cards */}
       <div className="max-w-7xl mx-auto px-4 pt-16 pb-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        <div className=" bg-teal-100 hover:bg-teal-200 dark:bg-black/30 text-black dark:text-white p-6 rounded-xl shadow-md flex flex-col items-center text-center  dark:hover:bg-white/10 transition">
+        <div className=" bg-gradient-to-tr from-teal-100 to-sky-300 hover:bg-teal-200 dark:bg-black/30 text-black dark:text-white p-6 rounded-xl shadow-md flex flex-col items-center text-center  dark:hover:bg-white/10 transition">
           <FaUserGraduate size={40} className="text-yellow-500 mb-3" />
           <h3 className="text-2xl font-bold">{tutorials.length}</h3>
           <p className="text-lg font-semibold text-black dark:text-gray-300">Total Tutors</p>
         </div>
 
-        <div className=" bg-teal-100 hover:bg-teal-200 dark:bg-black/30 text-black dark:text-white p-6 rounded-xl shadow-md flex flex-col items-center text-center  dark:hover:bg-white/10 transition">
+        <div className=" bg-gradient-to-tr from-teal-100 to-sky-300 hover:bg-teal-200 dark:bg-black/30 text-black dark:text-white p-6 rounded-xl shadow-md flex flex-col items-center text-center  dark:hover:bg-white/10 transition">
           <FaLanguage size={40} className="text-green-500 mb-3" />
           <h3 className="text-2xl font-bold">{uniqueTutorials.length}</h3>
           <p className="text-lg font-semibold text-black dark:text-gray-300">Languages Offered</p>
         </div>
 
-        <div className=" bg-teal-100 hover:bg-teal-200 dark:bg-black/30 text-black dark:text-white p-6 rounded-xl shadow-md flex flex-col items-center text-center  dark:hover:bg-white/10 transition">
+        <div className=" bg-gradient-to-tr from-teal-100 to-sky-300 hover:bg-teal-200 dark:bg-black/30 text-black dark:text-white p-6 rounded-xl shadow-md flex flex-col items-center text-center  dark:hover:bg-white/10 transition">
           <FaUserAlt size={40} className="text-blue-500 mb-3" />
           <h3 className="text-2xl font-bold">{users.length}</h3>
           <p className="text-lg font-semibold text-black dark:text-gray-300">Registered Users</p>
